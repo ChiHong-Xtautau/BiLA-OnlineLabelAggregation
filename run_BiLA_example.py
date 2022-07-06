@@ -67,29 +67,6 @@ def BiLA_online(noisy_labels_url, ground_truth_url, num_workers=None, \
 	la_model.close() # close the tensorflow session
 	return [BiLA_error_rates[-1], mj_error_rates[-1]]
 
-def BiLA_offline(noisy_labels_url, ground_truth_url, num_workers=None, \
-	ief=20, uef=20):
-
-	print("****************************************************")
-	print(noisy_labels_url, "num_workers:", num_workers)
-
-	# The ground truth labels are only used to verify the effectiveness of label aggregation
-	noisy_labels, ground_truth, classes = load_data.load_all(noisy_labels_url, ground_truth_url)
-
-	if not num_workers is None:
-		noisy_labels = noisy_labels[:,:num_workers]
-	
-	# Comparing nnmc with majority voting:
-	res = mv.majority_voting(noisy_labels.tolist())
-	error_rate(res, ground_truth, "majority voting")
-
-	# off-line learning case:
-	la_model = bila_mc.BiLA_MC() # create a label aggregation model
-	la_model.set(noisy_labels, classes=classes, init_epochs=ief, update_epochs=uef) # init the model with all noisy labels
-	la_model.init_train() # start initializing the model
-	aggregated_labels, confusion_matrices = la_model.aggregate(noisy_labels) # aggregating the noisy labels of all the samples
-	la_model.close() # close the tensorflow session
-	error_rate(aggregated_labels, ground_truth, "off-line BiLA")
 
 def exp_www():
 	ground_truth_file = './data/original/%s-train-labels.txt' % "cifar10"
@@ -98,12 +75,6 @@ def exp_www():
 	# cifar10
 	BiLA_online(noisy_labels_file, ground_truth_file, ieo=20, ueo=20, init_samples=1000, chunk_size=500)
 	#BiLA_online(noisy_labels_file, ground_truth_file, ieo=20, ueo=20, init_samples=1000, chunk_size=200)
-
-	# res = []
-	# for i in range(1,201):
-	# 	res.append(BiLA_online(noisy_labels_file, ground_truth_file, ieo=i, ueo=i, init_samples=500, chunk_size=25))
-	# print("**************************")
-	# print("res of optimizer:", [c[0] for c in res])
 
 
 if __name__ == "__main__":
