@@ -68,7 +68,7 @@ def BiLA_online(noisy_labels_url, ground_truth_url, num_workers=None, \
 	return [BiLA_error_rates[-1], mj_error_rates[-1]]
 
 
-def exp_www():
+def run():
 	ground_truth_file = './data/original/%s-train-labels.txt' % "cifar10"
 	noisy_labels_file = './data/synthetic/ana2d-%s-train-noisy-labels-bimodal-noise0.6-empty-prop0.1.txt' % "cifar10"
 
@@ -78,4 +78,4 @@ def exp_www():
 
 
 if __name__ == "__main__":
-	exp_www()
+	run()
