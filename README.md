@@ -7,6 +7,7 @@ If the code helps your work, please cite the following:
 
 # How to use
 An example of using the label aggregation function is shown in "run_BiLA_example.py".
+
 Using "python run_BiLA_example.py" execute the example.
 
 bila_mc.BiLA_MC is the class of the label aggregation algorithm.
