@@ -1,7 +1,8 @@
 # BiLA-OnlineLabelAggregation
 This is the code of the BiLA framework which is published on WWW2021. 
 
-If the code helps your work, please cite the following
+If the code helps your work, please cite the following:
+
 "Hong, C., Ghiassi, A., Zhou, Y., Birke, R. and Chen, L.Y., 2021, April. Online label aggregation: A variational bayesian approach. In Proceedings of the Web Conference 2021 (pp. 1904-1915)."
 
 # How to use
